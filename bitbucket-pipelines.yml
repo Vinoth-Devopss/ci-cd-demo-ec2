@@ -1,14 +1,12 @@
 pipelines:
- default:
-  - step:
-    name:  Push
-     script:
-      # Build and push image
-         - pipe: atlassian/rsync-deploy:0.4.3
-           variables:
-              USER: 'ubuntu'
-              SERVER: ‘13.233.179.101’
-              REMOTE_PATH: '/var/www/html'
-              SSH_KEY: $SSH_KEY
-              DEBUG: 'true'
+  branches:
+    dev:
+      - step:
+          script:
+            - mkdir -p ~/.ssh
+            - cat my_known_hosts >> ~/.ssh/known_hosts
+            - (umask  077 ; echo $SSH_KEY | base64 --decode > ~/.ssh/id_rsa)
+            - ssh -i  ubuntu@13.233.179.101
+            - cd /var/www/html/ 
+            - ls
                 
