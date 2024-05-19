@@ -18,5 +18,7 @@ jobs:
           script: |
             cd /var/www/html
             ls
+            git clone https://github.com/Vinoth-Devopss/ci-cd-demo-ec2.git
+            
   
             echo "The application deployed sucess on Dev Server"..!
