@@ -1,19 +1,15 @@
-image: ubuntu
+image: atlassian/default-image:2
 
 pipelines:
-  default:
-    - step:
-        script:
-          - echo "This step runs for all branches except those specified explicitly."
-
   branches:
-    main:
+    master:
       - step:
-          name: Build and Deploy to Main
-          deployment: production
-          caches:
-            - node
+          name: Deploy to EC2
           script:
-            - scp -o StrictHostKeyChecking=no -r .next/ ubuntu@13.233.179.101:/var/www/html/
-              # for react js project you have to use build directory instead of .next
-            - ssh -o StrictHostKeyChecking=no -r .next/ ubuntu@13.233.179.101 "systemctl restart nginx"
+            - pipe: atlassian/ssh-run:0.2.2
+              variables:
+                SSH_USER: 'ubuntu'
+                SERVER: '13.233.179.101'
+                SSH_KEY: $SSH_KEY
+                COMMAND: 'cd /var/www/html/ && ls'
+                
