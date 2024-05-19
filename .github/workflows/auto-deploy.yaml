@@ -16,11 +16,9 @@ jobs:
           password: ${{ secrets.DEEV_HOST_PASSWORD }}
           key: ${{ secrets.DEV_EC2_SSH_KEY }}
           script: |
-            cd /var/www/html/ci-cd-demo-ec2
+            cd /var/www/html/Demo-Repo
             ls
             git checkout main &&
             git pull origin main  &&
             sudo systemctl restart nginx
-            
-  
             echo "The application deployed sucess on Dev Server"...!
