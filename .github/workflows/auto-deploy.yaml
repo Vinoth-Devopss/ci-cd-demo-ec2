@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_HOST_IP }}
+          username: ${{ secrets.DEV_SERVER_USER_NAME }}
+          password: ${{ secrets.DEEV_HOST_PASSWORD }}
+          key: ${{ secrets.DEV_EC2_SSH_KEY }}
+          script: |
+            cd /var/www/html
+            ls
+  
+            echo "The application deployed sucess on Dev Server"..!
