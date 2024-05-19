@@ -1,15 +1,14 @@
-image: ubuntu
-
 pipelines:
-  branches:
-    main:
-      - step:
-          name: Deploy to EC2
-          script:
-            - pipe: atlassian/ssh-run:0.2.2
-              variables:
-                SSH_USER: 'ubuntu'
-                SERVER: '13.233.179.101'
-                SSH_KEY: $SSH_KEY
-                COMMAND: 'cd /var/www/html/ && ls'
+ default:
+  - step:
+    name:  Push
+     script:
+      # Build and push image
+         - pipe: atlassian/rsync-deploy:0.4.3
+           variables:
+              USER: 'ubuntu'
+              SERVER: ‘13.233.179.101’
+              REMOTE_PATH: '/var/www/html'
+              SSH_KEY: $SSH_KEY
+              DEBUG: 'true'
                 
