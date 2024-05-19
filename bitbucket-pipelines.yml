@@ -1,0 +1,19 @@
+image: ubuntu
+
+pipelines:
+  default:
+    - step:
+        script:
+          - echo "This step runs for all branches except those specified explicitly."
+
+  branches:
+    main:
+      - step:
+          name: Build and Deploy to Main
+          deployment: production
+          caches:
+            - node
+          script:
+            - scp -o StrictHostKeyChecking=no -r .next/ ubuntu@13.233.179.101:/var/www/html/
+              # for react js project you have to use build directory instead of .next
+            - ssh -o StrictHostKeyChecking=no -r .next/ ubuntu@13.233.179.101 "systemctl restart nginx"
