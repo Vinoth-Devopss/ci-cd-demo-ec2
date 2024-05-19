@@ -19,8 +19,6 @@ jobs:
             cd /var/www/html/ci-cd-demo-ec2
             ls
             git checkout main &&
-            git fetch --all &&
-            git reset --hard origin/main &&
             git pull origin main  &&
             sudo systemctl restart nginx
             
