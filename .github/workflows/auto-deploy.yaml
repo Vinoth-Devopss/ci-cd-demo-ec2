@@ -16,9 +16,13 @@ jobs:
           password: ${{ secrets.DEEV_HOST_PASSWORD }}
           key: ${{ secrets.DEV_EC2_SSH_KEY }}
           script: |
-            cd /var/www/html
+            cd /var/www/html/ci-cd-demo-ec2
             ls
-            git clone https://github.com/Vinoth-Devopss/ci-cd-demo-ec2.git
+            git checkout main &&
+            git fetch --all &&
+            git reset --hard origin/main &&
+            git pull origin main  &&
+            sudo systemctl restart nginx
             
   
             echo "The application deployed sucess on Dev Server"...!
