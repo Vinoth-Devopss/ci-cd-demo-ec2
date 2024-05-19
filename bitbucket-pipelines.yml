@@ -6,7 +6,7 @@ pipelines:
             - mkdir -p ~/.ssh
             - cat my_known_hosts >> ~/.ssh/known_hosts
             - (umask  077 ; echo $SSH_KEY | base64 --decode > ~/.ssh/id_rsa)
-            - ssh -i  ubuntu@13.233.179.101
+            - ssh ubuntu@13.233.179.101
             - cd /var/www/html/ 
             - ls
                 
