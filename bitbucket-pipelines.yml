@@ -1,6 +1,6 @@
 pipelines:
   branches:
-    dev:
+    main:
       - step:
           script:
             - mkdir -p ~/.ssh
